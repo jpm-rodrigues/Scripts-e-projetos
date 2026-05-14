@@ -1,0 +1,85 @@
+---
+title: "Dplyr"
+output: html_document
+date: "2024-09-07"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Pacote dplyr
+O pacote dplyr é um pacote para data processing, manipular os dados. As funções do dplyr seguem a seguinte estrutura:
+- Primeiro argumento é o df;
+- Argumentos subsequentes normalmente descrevem quais colunas seram manuseadas, sem a utilização de aspas;
+- O output é um novo df.
+
+As funções de do dplyr são divididas em 4 grupos, baseados no que elas manuseiam:
+- Rows (linhas)
+- Columns (colunas)
+- Groups (grupos)
+- Tables (tabelas)
+
+### Rows
+`filter()`: altera quais linhas estão presentes sem alterar suas ordens
+`arrange()`: altera a ordem das linhas sem alterar quais estão presentes
+`distinct()`: encontra linhas com valores únicos 
+`slice()`: altera as linhas com base em ordem
+
+#### `filter()`
+Operadores 
+  - > maior que;
+  - >= maior ou igual que;
+  - < menor que;
+  - <= menor ou igual que;
+  - == igual a;
+  - != diferente de;
+  - & checa por ambas as condições
+  - | checa por ou uma ou outra
+  - %in% faz uma busca combinade de == e | nos valores a direita.
+
+Uso básico
+```{r}
+novo_df <- df_original |> 
+  filter(coluna_df operador valor)
+
+flights |> 
+  filter(month == 1 | 2)
+```
+
+### `arrange()`
+Muda a ordem das linhas com base no valor das colunas. 
+Múltiplas colunas podem ser dadas, sendo utilizadas para quebrar o empate.
+Usar a função `desc()` para filtrar descendente.
+
+### `distinct()`
+Encontra todas as linhas únicas, removendo duplicatas.
+Pode encontrar as combinações únicas entre várias colunas(variáveis).
+  `.keep_all = TRUE` mantém todas as colunas do df, mesmo as não selecionadas
+
+Para encontrar o número de ocorrências, usar a função `count()`
+
+## Columns
+`mutate()`: cria novas colunas com base em colunas existentes;
+`select()`: altera quais colunas estão presentes;
+`rename()``: altera o nome das colunas;
+`relocate``: altera a posição das colunas.
+
+### `mutate()`
+Adiciona novas colunas calculadas a partir das colunas existentes.
+As novas colunas são criadas à direita por padrão. O argumento `.before` permite que as colunas sejam adicionadas ao lado esquerdo. 
+Da mesma forma existe o argumento `.after`. Pode-se colocar o nome da variável ao invés da posição no local. (Trocar o 1 no exemplo abaixo por o nome de uma coluna, por ex.)
+O argumento `.keep` permite especificar quais colunas aparecerão. O argumento `"used"` pode ser usado em conjunto para que apenas as colunas usadas no mutate sejam usadas.
+
+
+
+```{r}
+flights |> 
+  mutate(
+    gain = dep_delay - arr_delay,
+    speed = distance / air_time * 60,
+    .before = 1
+  )
+```
+
+### `select()`

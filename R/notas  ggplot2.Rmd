@@ -1,0 +1,80 @@
+---
+title: "ggplot2"
+date: "2024-09-09"
+output: 
+  powerpoint_presentation:
+    pandoc_args: ["--resource-path", ".:Imagens slide"]
+---
+ <!-- [Referência](https://datacarpentry.org/R-ecology-lesson/visualizing-ggplot.html) -->
+
+### Template básico 
+
+  ggplot(data = <DATA>) + 
+      <GEOM_FUNCTION>(
+          mapping = aes(<MAPPINGS>),
+          stat = <STAT>, 
+          position = <POSITION>
+          ) +
+      <COORDINATE_FUNCTION> +
+      <SCALE_FUNCTION> +
+
+### Aesthestics arguments
+#### Cor
+`color`: cor das linhas
+`fill`: cor do preenchimento
+`alpha`: definir transparência entre 0 e 1;
+
+#### Escala
+- `scale_`: muda diferentes escalas (alpha, color, size, shape, radius, x, y, time, fill, hue... etc)
+
+###
+#### Rótulos
+- A principal função é `labs()`, que fica fora do `aes()` permite dar os títulos dos axis, do mapa e tudo.
+- Alguns argumentos de escala possuem argumentos `labels_`, que modificam os rótulos do plot. Aparentemente `label_wrap_gen()`faz o texto ficar mais legível
+
+#### 
+- É possível salvar o código da função que gera o plot a um objeto, e utilizar <objeto> seguido de <+> e qualquer função dessas que utilizam +. As funções daqui pra frente também podem (e devem) ser usadas assim
+```{r}
+
+```
+
+
+### Temas
+- A função `theme()` permite customizar as partes não associadas aos dados do plot, como títulos, legendas, fontes, fundos, linhas de gride, legendas.
+
+- Alguns argumentos de theme:
+  - line
+  - rect
+  - text
+  - title
+  - aspect.ratio
+
+### 
+- As funções possuem hierarquias, podendo ser controladas bem especificamente. Usar `?theme()` para saber mais.
+
+### 
+#### As funções `element_` atuam no sistema de temas
+  - element_blank: deixa o elemento em branco
+  - element_rect
+  - element_line
+  - element_text
+  
+### 
+### Legendas `labs()`
+Modifica o rótulo dos eixos, legenda e do plot como um tudo. 
+Alguns argumentos:
+  - title
+  - subtitle
+  - caption
+  - tag
+  
+###
+#### Faceting `facet_wrap(vars())`
+Divide um plot baseado em uma variável categórica.
+O primeiro argumento é a váriável. 
+
+Alguns outros:
+  - ncol: 
+  
+  
+
